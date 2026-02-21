@@ -1,27 +1,29 @@
-pipeline{
-    agent any
-        stages {
-            stage ("PULL") {
-                steps {
-                    git 'https://github.com/gatakash02/clone.git'
-                    echo "PULL SUCCESS"
-                }
-            }
-            stage ("BUILD") {
-                steps {
-                    sh 'mvn clean package -DskipTests'
-                    echo "BUILD SUCCESS"
-                }
-            }
-            stage ("TEST") {
-                steps {
-                    echo "TEST SUCCESS"
-                }
-            }
-            stage ("DEPLOY") {
-                steps {
-                    echo "DEPLOY SUCCESS"
-                }
-            }
-        }
+pipeline {
+ agent any
+
+ stages {
+
+  stage("BUILD") {
+   steps {
+    dir('cdec-batch23/backend') { 
+     sh 'mvn clean package -DskipTests'
+     echo "BUILD SUCCESS"
     }
+   }
+  }
+
+  stage("TEST") {
+   steps {
+    echo "TEST SUCCESS"
+   }
+  }
+
+  stage("DEPLOY") {
+   steps {
+    echo "DEPLOY SUCCESS"
+   }
+  }
+
+ }
+}
+
